@@ -119,7 +119,6 @@ fn take_table_row<'a>(iter: &mut impl Iterator<Item = Event<'a>>, columns: &mut 
     let mut column = String::new();
     loop {
         let next = iter.next();
-        println!("{next:?}");
         match next {
             Some(Event::Text(text)) => {
                 column.push_str(text.as_ref());

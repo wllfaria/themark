@@ -8,7 +8,7 @@ for item in items
                 if p == "text"
                     span p.contents
                 if p == "link"
-                    span [foreground: #CCCC8F] " " p.label " "
-                    span [foreground: #FC60A8] "(" p.uri ")"
+                    span [foreground: #CCCC8F] "[" p.label "]"
+                    span [foreground: #118ab2] "(" p.uri ")"
                 if p == "inline_code"
                     span [bold: true, foreground: #FC60A8, background: #333333] " " p.contents " "

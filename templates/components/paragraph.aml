@@ -9,6 +9,6 @@ padding [bottom: 1]
                     span [bold: true, foreground: #FC60A8, background: #333333] " " p.contents " "
                 if p == "link"
                     span [foreground: #CCCC8F] "[" p.label "]"
-                    span [foreground: #FC60A8] "(" p.uri ")"
+                    span [foreground: #118ab2] "(" p.uri ")"
                 if p == "image"
                     @image { uri: p.uri, text: p.text }
