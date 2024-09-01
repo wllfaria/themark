@@ -1,0 +1,10 @@
+padding [bottom: 1]
+    hstack
+        container [width: 2]
+        text ""
+            for p in parts
+                if p == "text"
+                    span p.contents
+                if p == "link"
+                    span [foreground: #CCCC8F] "[" p.label "]"
+                    span [foreground: #FC60A8] "(" p.uri ")"

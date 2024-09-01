@@ -1,0 +1,4 @@
+hstack
+    container [width: 2]
+    text [foreground: #CCCC8F] "[" label "]"
+        span [foreground: #FC60A8] "(" uri ")"

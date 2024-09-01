@@ -1,0 +1,11 @@
+for item in items
+    hstack
+        container [width: 2]
+        container [width: 2]
+            text [foreground: "red"] "- "
+        text ""
+            for p in item.parts
+                if p == "text"
+                    span p.contents
+                if p == "inline_code"
+                    span [bold: true, foreground: "green"] p.contents

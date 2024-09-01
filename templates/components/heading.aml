@@ -1,0 +1,15 @@
+padding [bottom: 1, top: 1]
+    hstack
+        container [width: 2]
+        if level == 1
+            text [bold: true, foreground: #E5E5E5, background: #FC60A8] " " contents " "
+        if level == 2
+            text [bold: true, foreground: #E5E5E5, background: #7A28CB] " " contents " "
+        if level == 3
+            text [bold: true, foreground: #E5E5E5, background: #B68116] " " contents " "
+        if level == 4
+            text [bold: true, foreground: #EBEBD3] " " contents " "
+        if level == 5
+            text [bold: true, foreground: #DFDFB9] " " contents " "
+        if level == 6
+            text [bold: true, foreground: #CCCC8F] " " contents " "

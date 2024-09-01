@@ -1,0 +1,8 @@
+[package]
+name = "themark-ui"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anathema.workspace = true
+themark-parser.workspace = true

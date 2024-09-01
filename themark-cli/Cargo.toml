@@ -1,0 +1,10 @@
+[package]
+name = "themark-cli"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+themark-parser.workspace = true
+themark-ui.workspace = true
+
+clap = { version = "4.5.16", features = ["derive"] }
