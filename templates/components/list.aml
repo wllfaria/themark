@@ -7,5 +7,8 @@ for item in items
             for p in item.parts
                 if p == "text"
                     span p.contents
+                if p == "link"
+                    span [foreground: #CCCC8F] " " p.label " "
+                    span [foreground: #FC60A8] "(" p.uri ")"
                 if p == "inline_code"
-                    span [bold: true, foreground: "green"] p.contents
+                    span [bold: true, foreground: #FC60A8, background: #333333] " " p.contents " "

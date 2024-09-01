@@ -9,6 +9,10 @@ pub enum InnerToken {
         parts: Value<List<InnerToken>>,
     },
     Code(Value<String>),
+    CodeBlock {
+        content: Value<String>,
+        language: Value<String>,
+    },
     Heading {
         level: Value<u8>,
         content: Value<String>,
@@ -47,6 +51,10 @@ impl From<Token> for InnerToken {
             Token::ListItem { parts } => InnerToken::ListItem {
                 parts: List::from_iter(parts.into_iter().map(InnerToken::from)),
             },
+            Token::CodeBlock { content, language } => InnerToken::CodeBlock {
+                content: content.into(),
+                language: language.into(),
+            },
         }
     }
 }
@@ -59,6 +67,12 @@ impl State for InnerToken {
             (InnerToken::Code(v), _) => Some(v.value_ref(sub)),
             (InnerToken::Link { uri, .. }, Path::Key("uri")) => Some(uri.value_ref(sub)),
             (InnerToken::Link { label, .. }, Path::Key("label")) => Some(label.value_ref(sub)),
+            (InnerToken::CodeBlock { language, .. }, Path::Key("language")) => {
+                Some(language.value_ref(sub))
+            }
+            (InnerToken::CodeBlock { content, .. }, Path::Key("content")) => {
+                Some(content.value_ref(sub))
+            }
             (InnerToken::Heading { level, .. }, Path::Key("level")) => Some(level.value_ref(sub)),
             (InnerToken::Heading { content, .. }, Path::Key("content")) => {
                 Some(content.value_ref(sub))
@@ -77,6 +91,7 @@ impl State for InnerToken {
             InnerToken::List { .. } => Some(CommonVal::Str("list")),
             InnerToken::Link { .. } => Some(CommonVal::Str("link")),
             InnerToken::Code { .. } => Some(CommonVal::Str("inline_code")),
+            InnerToken::CodeBlock { .. } => Some(CommonVal::Str("code_block")),
             InnerToken::ListItem { .. } => Some(CommonVal::Str("list_item")),
         }
     }

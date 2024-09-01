@@ -1,15 +1,14 @@
-vstack [background: #1F1F1E]
-    for token in tokens
-        if token == "heading"
-            @heading { level: token.level, contents: token.content }
-        if token == "paragraph"
-            @paragraph { parts: token.parts }
-        if token == "list"
-            @list { items: token.items }
-        if token == "link"
-            @link { label: token.label, uri: token.uri }
-
-    expand
-    container [height: 1]
-        hstack [background: "red"]
+vstack
+    overflow
+        for token in tokens
+            if token == "heading"
+                @heading { level: token.level, contents: token.content }
+            if token == "paragraph"
+                @paragraph { parts: token.parts }
+            if token == "list"
+                @list { items: token.items }
+            if token == "link"
+                @link { label: token.label, uri: token.uri }
+            if token == "code_block"
+                @code_block { content: token.content, language: token.language }
             expand

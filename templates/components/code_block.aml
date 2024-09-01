@@ -1,0 +1,3 @@
+hstack
+    container [width: 2]
+    text content

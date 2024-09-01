@@ -1,4 +1,4 @@
-use pulldown_cmark::{Event, HeadingLevel, Parser, Tag, TagEnd};
+use pulldown_cmark::{CodeBlockKind, Event, HeadingLevel, Parser, Tag, TagEnd};
 
 #[derive(Debug)]
 pub enum Scopes {
@@ -21,6 +21,10 @@ pub enum Token {
     Link {
         uri: String,
         label: String,
+    },
+    CodeBlock {
+        content: String,
+        language: String,
     },
     Code(String),
     ListItem {
@@ -81,8 +85,6 @@ fn take_paragraph<'a>(iter: &mut impl Iterator<Item = Event<'a>>) -> Token {
         }
     }
 
-    println!("{parts:?}");
-
     Token::Paragraph { parts }
 }
 
@@ -128,12 +130,37 @@ fn take_list_items<'a>(iter: &mut impl Iterator<Item = Event<'a>>) -> Token {
         match next {
             Event::Text(text) => parts.push(Token::Text(text.to_string())),
             Event::Code(code) => parts.push(Token::Code(code.to_string())),
+            Event::Start(Tag::Link { .. }) => parts.push(take_link(iter, next)),
+            Event::Start(Tag::List(_)) => parts.push(take_list(iter)),
             Event::End(TagEnd::Item) => break,
-            _ => {}
+            _ => (),
         }
     }
 
     Token::ListItem { parts }
+}
+
+fn take_code_block<'a>(iter: &mut impl Iterator<Item = Event<'a>>, kind: CodeBlockKind) -> Token {
+    let mut content = String::new();
+
+    let language = match kind {
+        CodeBlockKind::Indented => String::new(),
+        CodeBlockKind::Fenced(lang) => lang.to_string(),
+    };
+
+    loop {
+        let Some(next) = iter.next() else {
+            break;
+        };
+
+        match next {
+            Event::Text(text) => content.push_str(&text),
+            Event::End(TagEnd::CodeBlock) => break,
+            _ => {}
+        }
+    }
+
+    Token::CodeBlock { content, language }
 }
 
 pub fn parse(input: &str) -> Vec<Token> {
@@ -145,10 +172,10 @@ pub fn parse(input: &str) -> Vec<Token> {
         let Some(event) = iter.next() else {
             break;
         };
-        println!("{event:?}");
         match event {
             Event::Start(Tag::Heading { level, .. }) => tokens.push(take_heading(&mut iter, level)),
             Event::Start(Tag::List(_)) => tokens.push(take_list(&mut iter)),
+            Event::Start(Tag::CodeBlock(kind)) => tokens.push(take_code_block(&mut iter, kind)),
             Event::Start(Tag::Paragraph) => tokens.push(take_paragraph(&mut iter)),
             _ => {}
         }

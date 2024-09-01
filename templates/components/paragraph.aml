@@ -5,6 +5,8 @@ padding [bottom: 1]
             for p in parts
                 if p == "text"
                     span p.contents
+                if p == "inline_code"
+                    span [bold: true, foreground: #FC60A8, background: #333333] " " p.contents " "
                 if p == "link"
                     span [foreground: #CCCC8F] "[" p.label "]"
                     span [foreground: #FC60A8] "(" p.uri ")"
