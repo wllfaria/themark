@@ -5,4 +5,4 @@ edition = "2021"
 
 [dependencies]
 pulldown-cmark = "0.12.0"
-anathema.workspace = true
+syntect = { version = "5.2.0", default-features = false, features = ["default-fancy"] }

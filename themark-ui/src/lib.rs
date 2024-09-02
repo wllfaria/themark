@@ -15,7 +15,7 @@ pub fn setup(tokens: Vec<Token>) {
     let doc = Document::new("@index");
 
     let backend = TuiBackend::builder()
-        //.enable_alt_screen()
+        .enable_alt_screen()
         .enable_mouse()
         .hide_cursor()
         .enable_raw_mode()
@@ -64,6 +64,24 @@ pub fn setup(tokens: Vec<Token>) {
         .register_prototype(
             "code_block",
             "templates/components/code_block.aml",
+            Empty::default,
+            Default::default,
+        )
+        .unwrap();
+
+    runtime
+        .register_prototype(
+            "image",
+            "templates/components/image.aml",
+            Empty::default,
+            Default::default,
+        )
+        .unwrap();
+
+    runtime
+        .register_prototype(
+            "table",
+            "templates/components/table.aml",
             Empty::default,
             Default::default,
         )

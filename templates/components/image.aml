@@ -1,0 +1,3 @@
+span [foreground: #FC60A8] "[IMAGE]: "
+span [foreground: #CCCC8F] text
+span [foreground: #FC60A8] " -> (" uri ")"

@@ -1,0 +1,9 @@
+padding [bottom: 1]
+    hstack
+        container [width: 2]
+        hstack
+            for heading in headings
+                vstack
+                    text [foreground: "red"] heading
+                    for col in cols[loop]
+                        text col "    "

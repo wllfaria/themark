@@ -9,6 +9,10 @@ vstack
                 @list { items: token.items }
             if token == "link"
                 @link { label: token.label, uri: token.uri }
+            if token == "image"
+                @image { text: token.text, uri: token.uri }
             if token == "code_block"
                 @code_block { content: token.content, language: token.language }
+            if token == "table"
+                @table { headings: token.headings, cols: token.cols }
             expand

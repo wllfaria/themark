@@ -1,3 +1,6 @@
 hstack
     container [width: 2]
-    text content
+    text ""
+        for line in content
+            for part in line.parts
+                span [foreground: part.fg, bold: part.bold] part.source
