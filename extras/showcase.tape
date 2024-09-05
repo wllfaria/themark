@@ -14,12 +14,17 @@ Hide
     Set WindowBar Colorful
     Set WindowBarSize 50
 
-    Type "cargo run -q -- sample.md"
+
+    Type "cargo run"
     Enter
     Sleep 2s
 Show
+Tab
 Sleep 2s
-Type@40ms "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj"
+Enter
+Sleep 5s
+Tab
+Type@40ms "jjjjjjjjjjjjj"
 Sleep 3s
-Type@40ms "kkkkkkkkkkkkkkkkkkkkkk"
+Type@40ms "kkkkkkk"
 Sleep 5s

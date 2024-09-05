@@ -6,3 +6,4 @@ edition = "2021"
 [dependencies]
 anathema.workspace = true
 themark-parser.workspace = true
+themark-fs.workspace = true

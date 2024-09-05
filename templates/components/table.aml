@@ -4,6 +4,6 @@ padding [bottom: 1]
         hstack
             for heading in headings
                 vstack
-                    text [foreground: "red"] heading
+                    text [foreground: COLORS.error] heading
                     for col in cols[loop]
                         text col "    "

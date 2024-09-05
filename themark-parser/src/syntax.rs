@@ -3,7 +3,7 @@ use syntect::highlighting::{FontStyle, Style, ThemeSet};
 use syntect::parsing::SyntaxSet;
 use syntect::util::LinesWithEndings;
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub struct CodeLine {
     pub parts: Vec<CodeToken>,
 }
@@ -20,7 +20,7 @@ impl From<CodeToken> for CodeLine {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub struct CodeToken {
     pub source: String,
     pub fg: (u8, u8, u8),

@@ -1,0 +1,11 @@
+vstack
+    align [alignment: "center"]
+        padding [left: 2, right: 2]
+            vstack
+                padding [bottom: 1]
+                    container [height: 3, background: COLORS.secondary]
+                        align [alignment: "center"]
+                            text [foreground: COLORS.on_primary, bold: true] "please wait"
+                container [height: 1]
+                    align [alignment: "center"]
+                        text [foreground: COLORS.primary] "we are loading your document..."

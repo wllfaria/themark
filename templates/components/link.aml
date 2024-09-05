@@ -1,4 +1,4 @@
 hstack
     container [width: 2]
-    text [foreground: #06d6a0] "[" label "]"
-        span [foreground: #d62828] "(" uri ")"
+    text [foreground: COLORS.muted] "[" label "]"
+        span [foreground: COLORS.primary] "(" uri ")"

@@ -1,0 +1,12 @@
+column
+    if selected
+        text [foreground: COLORS.on_primary] " " file_name
+    else
+        text [foreground: COLORS.muted] " " file_name
+expand
+column
+    text ""
+        if selected
+            span [foreground: COLORS.on_primary] size " "
+        else
+            span [foreground: COLORS.muted] size " "

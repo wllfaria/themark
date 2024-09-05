@@ -1,0 +1,11 @@
+vstack
+    align [alignment: "center"]
+        padding [left: 2, right: 2]
+            vstack
+                padding [bottom: 1]
+                    container [height: 3, background: COLORS.error]
+                        align [alignment: "center"]
+                            text [foreground: COLORS.on_error, bold: true] "Oops..."
+                container [height: 1]
+                    align [alignment: "center"]
+                        text [foreground: COLORS.error] "There was an error loading this document"

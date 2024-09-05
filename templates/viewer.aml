@@ -1,0 +1,24 @@
+if has_error == true
+    @error_doc
+
+if (loading_document == true || total_tokens == 0) && has_error == false
+    @loading_doc
+
+if has_error == false && loading_document == false
+    overflow
+        for token in tokens
+            if token == "link"
+                @link { label: token.label, uri: token.uri }
+            if token == "heading"
+                @heading { level: token.level, contents: token.content }
+            if token == "code_block"
+                @code_block { content: token.content, language: token.language }
+            if token == "image"
+                @image { text: token.text, uri: token.uri }
+            if token == "table"
+                @table { headings: token.headings, cols: token.cols }
+            if token == "paragraph"
+                @paragraph { parts: token.parts }
+            if token == "list"
+                @list { items: token.items }
+            expand

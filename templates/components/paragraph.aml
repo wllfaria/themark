@@ -6,9 +6,9 @@ padding [bottom: 1]
                 if p == "text"
                     span p.contents
                 if p == "inline_code"
-                    span [bold: true, foreground: #FC60A8, background: #333333] " " p.contents " "
+                    span [bold: true, foreground: COLORS.on_secondary, background: COLORS.hover] " " p.contents " "
                 if p == "link"
-                    span [foreground: #CCCC8F] "[" p.label "]"
-                    span [foreground: #118ab2] "(" p.uri ")"
+                    span [foreground: COLORS.muted] "[" p.label "]"
+                    span [foreground: COLORS.primary] "(" p.uri ")"
                 if p == "image"
                     @image { uri: p.uri, text: p.text }

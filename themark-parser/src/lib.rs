@@ -2,7 +2,7 @@ pub mod syntax;
 
 use pulldown_cmark::{CodeBlockKind, Event, HeadingLevel, Options, Parser, Tag, TagEnd};
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub enum Token {
     Text(String),
     Paragraph {
@@ -37,7 +37,7 @@ pub enum Token {
     },
 }
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub struct InnerHeadingLevel(u8);
 
 impl From<HeadingLevel> for InnerHeadingLevel {

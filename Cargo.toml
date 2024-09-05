@@ -1,9 +1,10 @@
 [workspace]
-members = ["themark-parser", "themark-ui", "themark-cli"]
+members = ["themark-parser", "themark-ui", "themark-cli", "themark-fs"]
 default-members = ["themark-cli"]
 resolver = "2"
 
 [workspace.dependencies]
 themark-parser = { path = "themark-parser" }
 themark-ui = { path = "themark-ui" }
+themark-fs = { path = "themark-fs" }
 anathema = { git = "https://github.com/togglebyte/anathema", branch = "dev" }

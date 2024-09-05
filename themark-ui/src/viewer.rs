@@ -1,29 +1,54 @@
 use anathema::component::{Component, KeyCode, KeyEvent, MouseEvent, MouseState};
 use anathema::default_widgets::Overflow;
 use anathema::state::{List, State, Value};
-use themark_parser::Token;
 
 use crate::inner_token::InnerToken;
 
-#[derive(State, Debug)]
-pub struct IndexState {
+#[derive(State, Debug, Default)]
+pub struct ViewerState {
     tokens: Value<List<InnerToken>>,
+    loading_document: Value<bool>,
+    total_tokens: Value<usize>,
+    has_error: Value<bool>,
 }
 
-impl IndexState {
-    pub fn new(tokens: Vec<Token>) -> IndexState {
-        IndexState {
-            tokens: tokens.into_iter().map(Into::into).collect(),
+impl ViewerState {
+    pub fn new(tokens: impl Iterator<Item = InnerToken>) -> Self {
+        let tokens = tokens.collect::<Vec<_>>();
+        Self {
+            loading_document: Value::new(tokens.is_empty()),
+            has_error: Value::new(false),
+            total_tokens: Value::new(tokens.len()),
+            tokens: List::from_iter(tokens),
         }
     }
 }
 
 #[derive(Default)]
-pub struct Index;
+pub struct Viewer;
 
-impl Component for Index {
-    type Message = ();
-    type State = IndexState;
+impl Component for Viewer {
+    type Message = String;
+    type State = ViewerState;
+
+    fn message(
+        &mut self,
+        message: Self::Message,
+        state: &mut Self::State,
+        _: anathema::widgets::Elements<'_, '_>,
+        _: anathema::prelude::Context<'_, Self::State>,
+    ) {
+        state.loading_document.set(true);
+        match themark_fs::load_markdown(message) {
+            Ok(tokens) => {
+                let tok: Vec<InnerToken> = tokens.into_iter().map(Into::into).collect::<Vec<_>>();
+                state.total_tokens.set(tok.len());
+                state.tokens = List::from_iter(tok);
+                state.loading_document.set(false);
+            }
+            Err(_) => state.has_error.set(true),
+        };
+    }
 
     fn on_mouse(
         &mut self,
@@ -45,7 +70,7 @@ impl Component for Index {
     fn on_key(
         &mut self,
         key: anathema::component::KeyEvent,
-        _state: &mut Self::State,
+        _: &mut Self::State,
         mut elements: anathema::widgets::Elements<'_, '_>,
         context: anathema::prelude::Context<'_, Self::State>,
     ) {

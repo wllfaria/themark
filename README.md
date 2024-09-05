@@ -17,6 +17,13 @@ cargo run -- README.md
 cargo build --release && ./target/release/themark-cli README.md
 ```
 
+```lua
+local a = function()
+    print("somethingsomething")
+end
+```
+
+
 ### Keymaps
 
 Using themark is really simple, use:

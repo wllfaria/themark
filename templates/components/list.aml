@@ -2,13 +2,13 @@ for item in items
     hstack
         container [width: 2]
         container [width: 2]
-            text [foreground: "red"] "- "
+            text [foreground: COLORS.error] "- "
         text ""
             for p in item.parts
                 if p == "text"
                     span p.contents
                 if p == "link"
-                    span [foreground: #CCCC8F] "[" p.label "]"
-                    span [foreground: #118ab2] "(" p.uri ")"
+                    span [foreground: COLORS.muted] "[" p.label "]"
+                    span [foreground: COLORS.primary] "(" p.uri ")"
                 if p == "inline_code"
-                    span [bold: true, foreground: #FC60A8, background: #333333] " " p.contents " "
+                    span [bold: true, foreground: COLORS.on_primary, background: COLORS.hover] " " p.contents " "

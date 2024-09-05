@@ -1,0 +1,32 @@
+let COLORS = {
+    primary: #ffafcc,
+    secondary: #a2d2ff,
+    error: #da2c38,
+    on_primary: #023047,
+    on_secondary: #023047,
+    on_error: #f5f1ed,
+    hover: #cdb4db,
+    muted: #eae2b7,
+}
+
+vstack
+    padding [left: 2, top: 1, right: 2]
+        vstack
+            padding [bottom: 1]
+                vstack
+                    text [background: COLORS.primary, foreground: COLORS.on_primary] " THEMARK "
+            padding [bottom: 1]
+                container [height: 3, background: COLORS.secondary]
+                    hstack
+                        align [alignment: "center"]
+                            text [bold: true, foreground: COLORS.on_secondary] "Press enter to select a document"
+                            expand
+            overflow [id: "scrollview"]
+                for row in documents
+                    container [height: 1]
+                        if loop == selected_idx
+                            row [background: COLORS.hover, foreground: COLORS.on_primary]
+                                @dashboard_item { file_name: row.file_name, size: row.size, selected: true }
+                        else
+                            row
+                                @dashboard_item { file_name: row.file_name, size: row.size, selected: false }

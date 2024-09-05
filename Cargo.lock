@@ -1028,8 +1028,16 @@ name = "themark-cli"
 version = "0.1.0"
 dependencies = [
  "clap",
+ "themark-fs",
  "themark-parser",
  "themark-ui",
+]
+
+[[package]]
+name = "themark-fs"
+version = "0.1.0"
+dependencies = [
+ "themark-parser",
 ]
 
 [[package]]
@@ -1045,6 +1053,7 @@ name = "themark-ui"
 version = "0.1.0"
 dependencies = [
  "anathema",
+ "themark-fs",
  "themark-parser",
 ]
 
